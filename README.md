@@ -224,13 +224,13 @@ Formulir untuk mendaftarkan target pemantauan baru. Pengguna dapat memilih tipe 
 Uptime Kuma menyediakan fitur *Status Page* publik yang memungkinkan pengguna luar melihat kondisi kesehatan infrastruktur tanpa perlu login.
 
 * **Daftar Halaman Status**:
-  ![Daftar Status Page](./Dokumentasi/Screenshot%202026-10-19%214128.png)
+  ![Daftar Status Page](./Dokumentasi/Screenshot%202026-10-19%20213756.png)
 
 * **Tampilan Status Page (`/status/compare`)**:
-  ![Tampilan Publik Status Page](./Dokumentasi/Screenshot%202026-10-19%20214052.png)
+  ![Tampilan Publik Status Page](./Dokumentasi/Screenshot%202026-10-19%20214128.png)
 
 * **Pengaturan & Edit Status Page**:
-  ![Edit Status Page](./Dokumentasi/Screenshot%202026-10-19%214250.png)
+  ![Edit Status Page](./Dokumentasi/Screenshot%202026-10-19%20214250.png)
 
 ### 6. Panel Pengaturan Sistem (Settings)
 Menu konfigurasi umum untuk mengatur Zona Waktu (*Timezone*), Notifikasi, Proxy Terbalik, Keamanan (2FA), serta Kunci API Steam.

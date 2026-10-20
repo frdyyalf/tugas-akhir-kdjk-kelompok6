@@ -210,6 +210,9 @@ Panel ini menampilkan grafik latensi (*response time*) secara *real-time*, waktu
 * Contoh Pemantauan Ping Network (`Google DNS`):
   ![Detail Monitor Ping](./Dokumentasi/Screenshot%202026-10-19%20214042.png)
 
+* Contoh Pemantauan Layanan Web Kampus (`Portal IPB University`):
+  ![Detail Monitor Web Kampus](./Dokumentasi/Screenshot%202026-10-19%20214052.png)
+
 ### 3. Log Statistik & Riwayat Kejadian (Incident History)
 Halaman statistik merangkum total monitor yang Aktif, Tidak Aktif, maupun Pemeliharaan, beserta tabel log kejadian (*event log*) yang mencatat respon server (misal: `200 - OK` atau `ECONNREFUSED`).
 

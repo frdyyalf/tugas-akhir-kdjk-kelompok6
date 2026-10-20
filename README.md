@@ -76,7 +76,7 @@ Prasyarat: Node.js >= 20.4, Git, dan PM2.
 
 ```bash
 # 1. Clone repositori resmi
-git clone [https://github.com/louislam/uptime-kuma.git](https://github.com/louislam/uptime-kuma.git)
+git clone https://github.com/louislam/uptime-kuma.git
 cd uptime-kuma
 
 # 2. Jalankan setup lingkungan
@@ -123,7 +123,7 @@ server {
     server_name monitoring.domainkamu.com;
 
     location / {
-        proxy_pass [http://127.0.0.1:3001](http://127.0.0.1:3001);
+        proxy_pass http://127.0.0.1:3001;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";

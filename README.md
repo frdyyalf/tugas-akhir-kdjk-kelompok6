@@ -1,7 +1,8 @@
+<a name="top"></a>
 <div align="center">
     <img src="https://raw.githubusercontent.com/louislam/uptime-kuma/master/public/icon.svg" width="120" alt="Uptime Kuma Logo" />
     <h1>Aplikasi Web Uptime Kuma</h1>
-    <p><b>Tugas Proyek Akhir Mata Kuliah Komunikasi Data dan Jaringan Komputer (KDKJ)</b></p>
+    <p><b>Tugas Proyek Akhir Mata Kurikulum Komunikasi Data dan Jaringan Komputer (KDKJ)</b></p>
 
 [![Azure VPS](https://img.shields.io/badge/Deployment-Azure%20VM-0089D6?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
 [![Docker](https://img.shields.io/badge/Docker-Engine-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
@@ -13,7 +14,8 @@
 
 ---
 
-## 👥 Anggota Kelompok
+## Anggota Kelompok
+[`^ kembali ke atas ^`](#top)
 
 Proyek ini disusun untuk memenuhi tugas akhir mata kuliah **Komunikasi Data dan Jaringan Komputer (KDKJ)**:
 
@@ -25,32 +27,16 @@ Proyek ini disusun untuk memenuhi tugas akhir mata kuliah **Komunikasi Data dan 
 | `M0403241065` | **Jeslyn Angelica** |
 | `M0403241097` | **Ferdy Alfalah** |
 
----
+<hr />
 
-## 📑 Daftar Isi
-
-- [Sekilas Tentang](#sekilas-tentang)
-  - [Fitur Utama](#fitur-utama)
-  - [Protokol & Teknologi Monitoring](#protokol--teknologi-monitoring)
-- [Spesifikasi Kebutuhan Server](#spesifikasi-kebutuhan-server)
-- [Instalasi](#instalasi)
-  - [1. Instalasi Manual di VM Lokal (VirtualBox)](#1-instalasi-manual-di-vm-lokal-virtualbox)
-  - [2. Instalasi di VPS Cloud (Azure)](#2-instalasi-di-vps-cloud-azure)
-  - [3. Masalah yang Ditemui dan Solusinya](#3-masalah-yang-ditemui-dan-solusinya)
-- [Konfigurasi](#konfigurasi)
-- [Maintenance](#maintenance)
-- [Otomatisasi](#otomatisasi)
-- [Cara Pemakaian](#cara-pemakaian)
-- [Pembahasan](#pembahasan)
-  - [Perbandingan dengan Aplikasi Sejenis](#perbandingan-dengan-aplikasi-sejenis)
-  - [Pendapat & Analisis](#pendapat--analisis)
-- [Referensi](#referensi)
+[Sekilas Tentang](#sekilas-tentang) | [Spesifikasi Server](#spesifikasi-kebutuhan-server) | [Instalasi](#instalasi) | [Konfigurasi](#konfigurasi) | [Maintenance](#maintenance) | [Otomatisasi](#otomatisasi) | [Cara Pemakaian](#cara-pemakaian) | [Pembahasan](#pembahasan) | [Referensi](#referensi)
 
 ---
 
 ## Sekilas Tentang
+[`^ kembali ke atas ^`](#top)
 
-**Uptime Kuma** adalah aplikasi pemantauan (*monitoring tool*) jaringan dan server *open-source* berbasis web yang dikembangkan oleh Louis Lam. Aplikasi ini dirancang sebagai layanan penyimpanan dan pemantauan mandiri (*self-hosted*) yang ringan, intuitif, dan bebas biaya lisensi sebagai alternatif dari layanan SaaS komersial seperti UptimeRobot.
+**Uptime Kuma** adalah aplikasi pemantauan (*monitoring tool*) jaringan dan server *open-source* berbasis web yang dikembangkan oleh Louis Lam. Aplikasi ini dirancang sebagai layanan pemantauan mandiri (*self-hosted*) yang ringan, intuitif, dan bebas biaya lisensi sebagai alternatif dari layanan SaaS komersial seperti UptimeRobot.
 
 Uptime Kuma digunakan untuk memantau ketersediaan (*uptime/downtime*), waktu respon (*latency*), masa berlaku sertifikat SSL/TLS, serta kesehatan layanan internal seperti kontainer Docker secara *real-time*.
 
@@ -76,7 +62,8 @@ Pada proyek ini, Uptime Kuma dijalankan di dua lingkungan: **VM lokal (VirtualBo
 
 ---
 
-## 🖥️ Spesifikasi Kebutuhan Server
+## Spesifikasi Kebutuhan Server
+[`^ kembali ke atas ^`](#top)
 
 Berikut rincian spesifikasi server yang digunakan untuk menjalankan Uptime Kuma:
 
@@ -92,6 +79,7 @@ Berikut rincian spesifikasi server yang digunakan untuk menjalankan Uptime Kuma:
 ---
 
 ## Instalasi
+[`^ kembali ke atas ^`](#top)
 
 ### 1. Instalasi Manual di VM Lokal (VirtualBox)
 
@@ -221,6 +209,7 @@ pm2 save && pm2 startup
 ---
 
 ## Konfigurasi
+[`^ kembali ke atas ^`](#top)
 
 - **Reverse Proxy & Domain**: Caddy Web Server mengarahkan domain `kuma-kelompok6.indonesiacentral.cloudapp.azure.com` ke port lokal `127.0.0.1:3001` sekaligus mengaktifkan SSL/HTTPS otomatis.
 - **Zona Waktu**: Mengatur zona waktu display ke `UTC+07:00 (Asia/Jakarta)` di menu **Settings > General** agar log kejadian dan grafik waktu sesuai dengan WIB.
@@ -232,6 +221,7 @@ pm2 save && pm2 startup
 ---
 
 ## Maintenance
+[`^ kembali ke atas ^`](#top)
 
 ### 1. Memeriksa Status Layanan
 ```bash
@@ -290,6 +280,7 @@ sudo docker restart uptime-kuma
 ---
 
 ## Otomatisasi
+[`^ kembali ke atas ^`](#top)
 
 Untuk mempermudah deployment penuh di lingkungan server baru, disediakan skrip bash `deploy.sh` yang mengotomatiskan seluruh proses instalasi Docker, Uptime Kuma, dan Caddy SSL:
 
@@ -346,6 +337,7 @@ Tambahkan entri jadwal cron pada server untuk membuat backup mingguan setiap har
 ---
 
 ## Cara Pemakaian
+[`^ kembali ke atas ^`](#top)
 
 Berikut adalah panduan operasional penggunaan fitur-fitur utama Uptime Kuma:
 
@@ -449,6 +441,7 @@ Mengatur zona waktu sistem (`Asia/Jakarta`) dan mengarahkan Entry Page ke halama
 ---
 
 ## Pembahasan
+[`^ kembali ke atas ^`](#top)
 
 ### Perbandingan dengan Aplikasi Sejenis
 
@@ -492,6 +485,7 @@ Dari pengalaman instalasi dan penggunaan, Uptime Kuma menawarkan keseimbangan te
 ---
 
 ## Referensi
+[`^ kembali ke atas ^`](#top)
 
 1. **Uptime Kuma Official Repository**: [https://github.com/louislam/uptime-kuma](https://github.com/louislam/uptime-kuma)
 2. **Uptime Kuma Official Documentation & Wiki**: [https://github.com/louislam/uptime-kuma/wiki](https://github.com/louislam/uptime-kuma/wiki)

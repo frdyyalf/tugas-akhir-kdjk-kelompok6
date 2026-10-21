@@ -1,280 +1,508 @@
 <div align="center">
-    <img src="https://raw.githubusercontent.com/louislam/uptime-kuma/master/public/icon.svg" width="128" alt="Uptime Kuma Logo" />
-    <h1>Laporan Proyek Akhir KDKJ: Uptime Kuma</h1>
-    <p><b>Aplikasi Web Self-Hosted Monitoring Server dan Jaringan</b></p>
+    <img src="https://raw.githubusercontent.com/louislam/uptime-kuma/master/public/icon.svg" width="130" alt="Uptime Kuma Logo" />
+    <h1>Laporan Proyek Akhir Komunikasi Data & Jaringan Komputer</h1>
+    <h2>Uptime Kuma: Enterprise-Grade Self-Hosted Infrastructure & Network Monitoring</h2>
+    <p><b>Program Studi Ilmu Komputer | IPB University</b></p>
+
+[![Azure VPS](https://img.shields.io/badge/Cloud-Azure%20VM-0089D6?style=flat&logo=microsoftazure)](https://azure.microsoft.com/)
+[![Docker](https://img.shields.io/badge/Container-Docker%20Engine-2496ED?style=flat&logo=docker)](https://www.docker.com/)
+[![Reverse Proxy](https://img.shields.io/badge/Proxy-Caddy%20v2-1F88C0?style=flat&logo=caddy)](https://caddyserver.com/)
+[![SSL Active](https://img.shields.io/badge/SSL%2FTLS-Let's%20Encrypt-003A70?style=flat&logo=letsencrypt)](https://letsencrypt.org/)
+[![Status Page](https://img.shields.io/badge/Status%20Page-Public%20Access-00C853?style=flat)](https://kuma-kelompok6.indonesiacentral.cloudapp.azure.com/status/public)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 </div>
 
 <hr />
 
-[Sekilas Tentang](#sekilas-tentang) | [Instalasi](#instalasi) | [Konfigurasi](#konfigurasi) | [Maintenance](#maintenance) | [Otomatisasi](#otomatisasi) | [Cara Pemakaian](#cara-pemakaian) | [Pembahasan](#pembahasan) | [Referensi](#referensi)
+## 👥 Informasi Kelompok 6
+* **Program Studi**: Ilmu Komputer (S1) - Semester 4
+* **Mata Kuliah**: Komunikasi Data dan Jaringan Komputer (KDKJ)
+* **Anggota Kelompok**:
+  1. **Ferdy Alfalah** (NIM: M0403241097)
+  2. **Anggota Kelompok 2** (NIM: M040324xxxx)
+  3. **Anggota Kelompok 3** (NIM: M040324xxxx)
+* **Live Public Status Page**: [https://kuma-kelompok6.indonesiacentral.cloudapp.azure.com/status/public](https://kuma-kelompok6.indonesiacentral.cloudapp.azure.com/status/public)
 
 ---
 
-# Sekilas Tentang
+## 📌 Daftar Isi
+- [Sekilas Tentang & Latar Belakang](#-sekilas-tentang--latar-belakang)
+- [Arsitektur & Topologi Jaringan](#-arsitektur--topologi-jaringan)
+- [Fitur Utama & Protokol yang Didukung](#-fitur-utama--protokol-yang-didukung)
+- [Spesifikasi Lingkungan Deployment](#-spesifikasi-lingkungan-deployment)
+- [Panduan Instalasi & Deployment Lengkap](#-panduan-instalasi--deployment-lengkap)
+  - [Metode A: Local Environment (Virtual Machine / WSL2)](#metode-a-local-environment-virtual-machine--wsl2)
+  - [Metode B: Production Cloud VPS (Azure Deployment)](#metode-b-production-cloud-vps-azure-deployment)
+- [Konfigurasi Monitoring & Aplikasi](#-konfigurasi-monitoring--aplikasi)
+- [Otomatisasi Deployment](#-otomatisasi-deployment)
+- [Maintenance & Operasional Server](#-maintenance--operasional-server)
+- [Cara Pemakaian & Hasil Pengujian](#-cara-pemakaian--hasil-pengujian)
+- [Pembahasan & Analisis Komdat](#-pembahasan--analisis-komdat)
+- [Kesimpulan](#-kesimpulan)
+- [Referensi](#-referensi)
+
+---
+
+## 📖 Sekilas Tentang & Latar Belakang
 [`^ kembali ke atas ^`](#)
 
-**Uptime Kuma** adalah aplikasi pemantauan (*monitoring tool*) jaringan dan server open-source berbasis web yang dikembangkan oleh Louis Lam. Aplikasi ini dirancang sebagai alternatif mandiri (*self-hosted*) untuk layanan komersial seperti UptimeRobot.
+Dalam infrastruktur teknologi informasi modern, ketersediaan (*availability*) dan keandalan (*reliability*) layanan web serta infrastruktur jaringan merupakan kriteria kritis. Gangguan (*downtime*) pada server aplikasi, database, atau resolver DNS dapat mengakibatkan kerugian operasional yang signifikan. 
 
-Uptime Kuma memungkinkan administrator jaringan dan pengembang sistem untuk memantau ketersediaan (*uptime/downtime*), waktu respon (*latency*), status sertifikat SSL/TLS, serta kesehatan berbagai protokol jaringan (HTTP/HTTPS, TCP, Ping, DNS, WebSocket, Docker Container, dan lain-lain) secara *real-time* melalui antarmuka yang modern, reaktif, dan intuitif.
+**Uptime Kuma** adalah aplikasi pemantauan (*monitoring tool*) infrastruktur open-source berbasis web yang dikembangkan oleh Louis Lam. Aplikasi ini dirancang sebagai solusi *self-hosted* berkinerja tinggi sebagai alternatif independen untuk layanan SaaS komersial seperti UptimeRobot, Datadog, atau Statuspage.io.
 
-### Fitur Utama:
-- **Dukungan Banyak Protokol**: Memantau HTTP(s), Ping, TCP Port, DNS Record, Keyword HTTP, JSON Query, WebSocket, Steam Game Server, hingga Docker Container.
-- **Interval Pemantauan Cepat**: Pemantauan frekuensi tinggi hingga interval 20 detik.
-- **Notifikasi Multi-Channel**: Terintegrasi dengan lebih dari 90+ layanan notifikasi seperti Telegram, Discord, Slack, Email (SMTP), Gotify, Pushover, dan Webhook.
-- **Status Page Terkustomisasi**: Membuat halaman status publik yang terpisah untuk menginformasikan kondisi infrastruktur kepada pengguna akhir (*end-user*).
-- **Pemantauan Sertifikat SSL/TLS**: Peringatan otomatis sebelum sertifikat keamanan domain kadaluarsa.
-- **Keamanan Lengkap**: Mendukung *Two-Factor Authentication* (2FA) dan konfigurasi *Proxy*.
+Proyek akhir ini bertujuan untuk merancang, mengimplementasikan, dan mengevaluasi sistem monitoring yang andal pada lingkungan **Azure Cloud VPS** menggunakan **Docker Engine** dan **Caddy Reverse Proxy**. Sistem ini dikonfigurasi untuk memantau berbagai layer jaringan (Layer 3, Layer 4, Layer 7, hingga Host-level Container Health) dan menyediakan **Status Page Publik** yang dapat diakses oleh *end-user* tanpa autentikasi.
 
 ---
 
-# Instalasi
+## 🌐 Arsitektur & Topologi Jaringan
 [`^ kembali ke atas ^`](#)
 
-Panduan instalasi ini dirancang secara umum sehingga dapat diterapkan di berbagai lingkungan, baik pada **Virtual Machine (VM) lokal** (VirtualBox/VMware), **VPS Cloud** (Azure, AWS, DigitalOcean), maupun **Server Bare Metal** berbasis Linux.
+Sistem di-deploy di lingkungan Microsoft Azure Cloud dengan arsitektur *reverse proxy* dan kontainerisasi terisolasi.
 
-#### Kebutuhan Sistem Minimum:
-- **Sistem Operasi**: Linux Major Distros (Ubuntu 20.04/22.04 LTS, Debian, CentOS, atau Arch Linux).
-- **CPU**: Minimal 1 Core.
-- **RAM**: Minimal 1 GB.
-- **Disk Space**: Minimal 5 GB.
-
----
-
-### Opsi 1: Instalasi via Docker (Sangat Direkomendasikan)
-
-Metode kontainerisasi menggunakan Docker adalah cara paling cepat, bersih, dan mudah di-maintain.
-
-1. **Pasang Docker Engine di Server**:
-```bash
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y docker.io
-sudo systemctl enable --now docker
+```text
+[ Client / Internet ]
+        │
+        │ HTTP (Port 80) / HTTPS (Port 443)
+        ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│ Azure Virtual Machine (Ubuntu 22.04 LTS)                                │
+│ Public IP: 70.153.81.95                                                 │
+│ FQDN: kuma-kelompok6.indonesiacentral.cloudapp.azure.com              │
+│                                                                        │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ Network Security Group (NSG Firewall)                            │  │
+│  │ Allowed Inbound: Port 22 (SSH), Port 80 (HTTP), Port 443 (HTTPS)  │  │
+│  └─────────────────────────────────┬────────────────────────────────┘  │
+│                                    │                                   │
+│                                    ▼                                   │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ Caddy Reverse Proxy (Host Web Server)                            │  │
+│  │ - Auto TLS / Let's Encrypt SSL Certificate                       │  │
+│  │ - HTTP to HTTPS Redirect                                         │  │
+│  │ - Proxy Pass: 127.0.0.1:3001                                     │  │
+│  └─────────────────────────────────┬────────────────────────────────┘  │
+│                                    │ Inter-process (Loopback)          │
+│                                    ▼                                   │
+│  ┌──────────────────────────────────────────────────────────────────┐  │
+│  │ Docker Engine / Container Runtime                                │  │
+│  │                                                                  │  │
+│  │  ┌────────────────────────────────────────────────────────────┐  │  │
+│  │  │ Uptime Kuma Container (louislam/uptime-kuma:2)               │  │  │
+│  │  │ Internal Port: 3001                                          │  │  │
+│  │  │ Volume: uptime-kuma -> /app/data (SQLite Persist)            │  │  │
+│  │  │ Socket Mount: /var/run/docker.sock (Health Check)            │  │  │
+│  │  └──────────────────────────────┬─────────────────────────────┘  │  │
+│  └─────────────────────────────────┼────────────────────────────────┘  │
+└────────────────────────────────────┼───────────────────────────────────┘
+                                     │ Outbound Monitoring Traffic
+                                     ▼
+                     ┌───────────────────────────────┐
+                     │ External Target Services      │
+                     │ - HTTP/HTTPS (Portal IPB)     │
+                     │ - DNS Resolver (Cloudflare)   │
+                     │ - TCP Port (1.1.1.1:443)      │
+                     │ - ICMP Ping (Google 8.8.8.8)  │
+                     └───────────────────────────────┘
 ```
 
-2. **Jalankan Container Uptime Kuma**:
+---
+
+## ✨ Fitur Utama & Protokol yang Didukung
+[`^ kembali ke atas ^`](#)
+
+1. **Multi-Protocol Monitoring**:
+   - **Layer 7 (Application)**: HTTP(S), DNS Record Resolution, WebSockets, HTTP Keyword Detection.
+   - **Layer 4 (Transport)**: TCP Port Connectivity Checking.
+   - **Layer 3 (Network)**: ICMP Ping RTT (Round Trip Time) Latency.
+   - **Host / Container Level**: Direct Docker Socket Inspection (`/var/run/docker.sock`).
+2. **High-Frequency Heartbeat**: Interval pengujian dapat dikonfigurasi mulai dari 20 detik hingga sesuai kebutuhan.
+3. **Automatic SSL/TLS Expiry Monitoring**: Peringatan dini sebelum sertifikat SSL target kadaluarsa.
+4. **Public Status Page**: Halaman publik terpisah dengan slug kustom (`/status/public`) untuk transparansi ketersediaan layanan.
+5. **Interactive UI**: Antarmuka berbasis Vue 3 dan Socket.io untuk pembaruan statistik *real-time* tanpa *refresh* halaman.
+6. **Alerting & Notifications**: Integrasi ke 90+ saluran notifikasi (Telegram, Discord, Slack, Email SMTP, Webhook).
+
+---
+
+## 💻 Spesifikasi Lingkungan Deployment
+[`^ kembali ke atas ^`](#)
+
+### 1. Spesifikasi Hardware & Cloud (Azure VPS)
+- **Cloud Provider**: Microsoft Azure (Azure for Students)
+- **Virtual Machine Size**: Standard_B1s (1 vCPU, 1 GiB RAM)
+- **Operating System**: Ubuntu 22.04.4 LTS (Jammy Jellyfish) 64-bit
+- **Disk Allocation**: 30 GiB Premium SSD
+- **Public IP Address**: `70.153.81.95`
+- **DNS Hostname (FQDN)**: `kuma-kelompok6.indonesiacentral.cloudapp.azure.com`
+
+### 2. Software Stack
+- **Container Engine**: Docker Engine v26.x & Docker Compose
+- **Reverse Proxy**: Caddy Web Server v2.7
+- **Application Core**: Uptime Kuma v2.x (Node.js runtime + SQLite3)
+- **SSL Certificate**: Let's Encrypt Authority (ACME Protocol via Caddy)
+
+---
+
+## 🛠️ Panduan Instalasi & Deployment Lengkap
+[`^ kembali ke atas ^`](#)
+
+### Metode A: Local Environment (Virtual Machine / WSL2)
+
+Metode ini cocok untuk pengujian lokal menggunakan VirtualBox, VMware, atau Windows Subsystem for Linux (WSL2).
+
+1. **Persiapan Virtual Machine**:
+   - Install Ubuntu Server 22.04 LTS pada VirtualBox.
+   - Atur Network Adapter ke **Bridged Adapter** agar VM mendapatkan IP lokal dari router (misal: `192.168.1.50`).
+
+2. **Instalasi Docker Engine**:
+   ```bash
+   sudo apt-get update && sudo apt-get upgrade -y
+   sudo apt-get install -y ca-certificates curl gnupg lsb-release
+   curl -fsSL [https://download.docker.com/linux/ubuntu/gpg](https://download.docker.com/linux/ubuntu/gpg) | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] [https://download.docker.com/linux/ubuntu](https://download.docker.com/linux/ubuntu) $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   sudo apt-get update
+   sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+   ```
+
+3. **Jalankan Uptime Kuma via Docker**:
+   ```bash
+   sudo docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:2
+   ```
+
+4. **Akses Lokal**:
+   Buka browser dan akses `http://<IP_VM_LOKAL>:3001` (misal: `http://192.168.1.50:3001`).
+
+---
+
+### Metode B: Production Cloud VPS (Azure Deployment)
+
+Metode ini adalah **implementasi utama yang diterapkan oleh Kelompok 6** untuk menghasilkan service publik berbasis domain dan SSL HTTPS resmi.
+
+#### Langkah 1: Pengaturan Azure Network Security Group (NSG)
+Buka Portal Azure $\rightarrow$ Virtual Machine $\rightarrow$ **Networking**, lalu tambahkan **Inbound Port Rules**:
+- `SSH` (Port 22 / TCP) $\rightarrow$ Allow
+- `HTTP` (Port 80 / TCP) $\rightarrow$ Allow
+- `HTTPS` (Port 443 / TCP) $\rightarrow$ Allow
+
+#### Langkah 2: Setup Container Uptime Kuma dengan Docker Socket Access
+Akses VPS via SSH:
+```bash
+ssh azureuser@kuma-kelompok6.indonesiacentral.cloudapp.azure.com
+```
+
+Jalankan Uptime Kuma dengan melakukan *mounting* volume data dan socket Docker agar Uptime Kuma dapat memantau kontainer lokal:
 ```bash
 sudo docker run -d \
   --restart=always \
-  -p 3001:3001 \
+  -p 127.0.0.1:3001:3001 \
   -v uptime-kuma:/app/data \
+  -v /var/run/docker.sock:/var/run/docker.sock \
   --name uptime-kuma \
   louislam/uptime-kuma:2
 ```
-*Keterangan Parameter:*
-- `-d`: Menjalankan kontainer di latar belakang (*detached mode*).
-- `--restart=always`: Kontainer otomatis menyala kembali saat server/VM booting.
-- `-p 3001:3001`: Meneruskan port 3001 dari host server ke port 3001 kontainer.
-- `-v uptime-kuma:/app/data`: Memetakan *volume* persisten agar data pemantauan tidak hilang saat kontainer diperbarui.
+*Catatan Security*: Port `3001` diikat (*bound*) ke `127.0.0.1` agar aplikasi tidak dapat diakses langsung via port mentah, melainkan wajib melalui Reverse Proxy Caddy.
 
----
-
-### Opsi 2: Instalasi Non-Docker (Node.js & PM2)
-
-Jika server tidak mendukung Docker, Uptime Kuma dapat dijalankan langsung menggunakan Node.js dan PM2 Process Manager.
-
-Prasyarat: Node.js >= 20.4, Git, dan PM2.
-
+#### Langkah 3: Konfigurasi Caddy Reverse Proxy & SSL Otomatis
+Install Caddy Web Server di Ubuntu:
 ```bash
-# 1. Clone repositori resmi
-git clone https://github.com/louislam/uptime-kuma.git
-cd uptime-kuma
-
-# 2. Jalankan setup lingkungan
-npm run setup
-
-# 3. Install PM2 dan jalankan server di latar belakang
-npm install pm2 -g && pm2 install pm2-logrotate
-pm2 start server/server.js --name uptime-kuma
-pm2 startup && pm2 save
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+curl -1sLf '[https://dl.cloudsmith.io/public/caddy/stable/gpg.key](https://dl.cloudsmith.io/public/caddy/stable/gpg.key)' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf '[https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt](https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt)' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install caddy -y
 ```
 
----
-
-### Opsi Deployment Akses Publik (Internet)
-
-Agar Uptime Kuma dapat diakses dari internet secara global, terdapat dua opsi umum:
-1. **VPS Cloud Publik (Berbayar / Kredit Mahasiswa)**:
-   Mendeploy di cloud provider (seperti Azure for Students, DigitalOcean, atau AWS) dengan mengalokasikan *Public IP* statis dan membuka port `3001` pada firewall/Network Security Group.
-2. **Cloudflare Tunnel (Gratis & Tanpa Port Forwarding)**:
-   Jika aplikasi di-deploy di VM lokal, gunakan Cloudflare Tunnel untuk mengekspos port local 3001 ke URL HTTPS publik secara gratis:
+Edit berkas konfigurasi Caddyfile (`/etc/caddy/Caddyfile`):
 ```bash
-sudo docker run -d --network=host --name cloudflared cloudflare/cloudflared:latest tunnel --url http://localhost:3001
+sudo nano /etc/caddy/Caddyfile
 ```
 
----
-
-# Konfigurasi
-[`^ kembali ke atas ^`](#)
-
-### 1. Konfigurasi Notifikasi (Contoh: Telegram Bot)
-Agar administrator langsung mendapatkan peringatan otomatis saat layanan mengalami gangguan (*down*):
-1. Masuk ke dashboard Uptime Kuma -> Pilih **Pengaturan** (*Settings*) -> **Notifikasi**.
-2. Klik **Setel Notifikasi**.
-3. Pilih **Telegram** sebagai *Notification Type*.
-4. Masukkan **Bot Token** (diperoleh dari `@BotFather`) dan **Chat ID** tujuan.
-5. Klik **Tes** untuk menguji pengiriman pesan, lalu klik **Simpan**.
-
-### 2. Konfigurasi Reverse Proxy & Nginx (Opsional)
-Untuk penggunaan domain kustom (misal: `https://monitoring.domain.com`), disarankan menggunakan Nginx sebagai *Reverse Proxy*:
-
-```nginx
-server {
-    listen 80;
-    server_name monitoring.domainkamu.com;
-
-    location / {
-        proxy_pass http://127.0.0.1:3001;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-    }
+Isi dengan konfigurasi berikut:
+```caddy
+kuma-kelompok6.indonesiacentral.cloudapp.azure.com {
+    reverse_proxy 127.0.0.1:3001
 }
 ```
 
----
-
-# Maintenance
-[`^ kembali ke atas ^`](#)
-
-### 1. Pembaruan Versi Aplikasi (Update)
-Pembaruan aplikasi versi Docker dapat dilakukan tanpa merusak data pemantauan:
-
+Restart dan aktifkan Caddy:
 ```bash
-# Hentikan kontainer lama
-sudo docker stop uptime-kuma && sudo docker rm uptime-kuma
-
-# Unduh image versi terbaru
-sudo docker pull louislam/uptime-kuma:2
-
-# Jalankan kembali kontainer dengan volume data yang sama
-sudo docker run -d --restart=always -p 3001:3001 -v uptime-kuma:/app/data --name uptime-kuma louislam/uptime-kuma:2
+sudo systemctl restart caddy
+sudo systemctl enable caddy
 ```
-
-### 2. Cadangan Data (Backup & Restore)
-Seluruh konfigurasi dan riwayat statistik disimpan dalam database SQLite di dalam volume `uptime-kuma`.
-
-* **Backup Data**:
-```bash
-sudo docker cp uptime-kuma:/app/data ./backup_kuma_data
-```
-* **Restore Data**:
-```bash
-sudo docker cp ./backup_kuma_data/. uptime-kuma:/app/data
-sudo docker restart uptime-kuma
-```
+*Caddy akan secara otomatis meminta dan memperbarui sertifikat SSL Let's Encrypt serta mengalihkan semua lalu lintas HTTP (Port 80) ke HTTPS (Port 443).*
 
 ---
 
-# Otomatisasi
+## ⚙️ Konfigurasi Monitoring & Aplikasi
 [`^ kembali ke atas ^`](#)
 
-Pengguna dapat memanfaatkan *Shell Script* sederhana untuk mengotomatiskan seluruh proses instalasi Docker dan deployment Uptime Kuma dalam satu langkah:
+### 1. Setup Awal Admin
+Saat pertama kali membuka `https://kuma-kelompok6.indonesiacentral.cloudapp.azure.com`, buat akun Admin utama dengan mendaftarkan Username dan Password.
 
-File `deploy.sh`:
+### 2. Konfigurasi Docker Host (Local Socket)
+1. Masuk ke **Settings** $\rightarrow$ **Docker Hosts** $\rightarrow$ **Setup Docker Host**.
+2. **Friendly Name**: `Local Docker`
+3. **Docker Type**: `Socket`
+4. **Docker Daemon Socket**: `/var/run/docker.sock`
+5. Klik **Save**.
+
+### 3. Pendaftaran Target Monitor (Multi-Layer)
+Sistem Kelompok 6 dikonfigurasi dengan 6 target pemantauan representatif:
+
+| Friendly Name | Monitor Type | Target / Hostname | Layer Jaringan | Tujuan Pemantauan |
+| :--- | :--- | :--- | :--- | :--- |
+| **Portal IPB University** | `HTTP(s)` | `https://ipb.ac.id/` | Layer 7 (App) | Ketersediaan Web Kampus & Masa Berlaku SSL |
+| **GitHub** | `HTTP(s)` | `https://github.com/` | Layer 7 (App) | Ketersediaan Platform Repositori Kode |
+| **Google Primary DNS** | `Ping` | `8.8.8.8` | Layer 3 (Network) | Latensi RTT Network & Packet Loss |
+| **Cloudflare** | `TCP Port` | `1.1.1.1:443` | Layer 4 (Transport) | Keandalan Port 443 TCP Resolver |
+| **Cloudflare** | `DNS` | `google.com` via `1.1.1.1` | Layer 7 (App) | Kecepatan Resolusi A-Record DNS |
+| **Uptime Kuma Health** | `Docker Container`| Container Name: `uptime-kuma` | Host Infrastructure | Status Kesehatan Kontainer Monitoring |
+
+### 4. Setup Public Status Page (`/status/public`)
+1. Klik **Status Pages** di menu kanan atas $\rightarrow$ **Add New Status Page**.
+2. **Title**: `System Status - Kelompok 6`
+3. **Slug**: `public`
+4. Tambahkan seluruh monitor yang telah dikonfigurasi ke dalam daftar tampilan.
+5. Kosongkan *Password Protection* agar halaman dapat diakses secara publik.
+6. Klik **Save**.
+7. Akses Public URL: `https://kuma-kelompok6.indonesiacentral.cloudapp.azure.com/status/public`
+
+---
+
+## 🤖 Otomatisasi Deployment
+[`^ kembali ke atas ^`](#)
+
+Untuk mempercepat instalasi ulang atau *deployment* di server baru, disediakan skrip otomatisasi bash `deploy.sh`:
+
 ```bash
 #!/bin/bash
-echo "=== Memulai Otomatisasi Deployment Uptime Kuma ==="
-sudo apt-get update -y
+# ====================================================================
+# Automated Deployment Script for Uptime Kuma & Caddy SSL
+# Developed by Kelompok 6 KDKJ - IPB University
+# ====================================================================
+
+set -e
+
+DOMAIN="kuma-kelompok6.indonesiacentral.cloudapp.azure.com"
+
+echo "=== [1/4] Updating System Packages ==="
+sudo apt-get update && sudo apt-get upgrade -y
+
+echo "=== [2/4] Installing Docker Engine ==="
 sudo apt-get install -y docker.io
 sudo systemctl enable --now docker
 
+echo "=== [3/4] Deploying Uptime Kuma Container ==="
 sudo docker run -d \
   --restart=always \
-  -p 3001:3001 \
+  -p 127.0.0.1:3001:3001 \
   -v uptime-kuma:/app/data \
+  -v /var/run/docker.sock:/var/run/docker.sock \
   --name uptime-kuma \
   louislam/uptime-kuma:2
 
-echo "=== Deployment Selesai! Akses aplikasi pada http://localhost:3001 ==="
+echo "=== [4/4] Installing & Configuring Caddy Reverse Proxy ==="
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+curl -1sLf '[https://dl.cloudsmith.io/public/caddy/stable/gpg.key](https://dl.cloudsmith.io/public/caddy/stable/gpg.key)' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf '[https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt](https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt)' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update && sudo apt install caddy -y
+
+echo "$DOMAIN {
+    reverse_proxy 127.0.0.1:3001
+}" | sudo tee /etc/caddy/Caddyfile
+
+sudo systemctl restart caddy
+
+echo "===================================================================="
+echo "Deployment Complete! Access status page at: https://$DOMAIN/status/public"
+echo "===================================================================="
 ```
 
 ---
 
-# Cara Pemakaian
+## 🛡️ Maintenance & Operasional Server
 [`^ kembali ke atas ^`](#)
 
-Berikut adalah panduan antarmuka dan penggunaan fitur-fitur utama Uptime Kuma berdasarkan hasil pengujian:
+### 1. Update Version Aplikasi
+```bash
+# Stop dan hapus kontainer lama (data tetap aman di volume)
+sudo docker stop uptime-kuma && sudo docker rm uptime-kuma
 
-### 1. Halaman Login / Autentikasi
-Saat diakses pertama kali, sistem meminta pembuatan akun **Admin** utama untuk mengamankan panel *dashboard*.
+# Pull image terbaru
+sudo docker pull louislam/uptime-kuma:2
 
-![Halaman Login Admin](./Dokumentasi/Screenshot%202026-10-19%20213107.png)
+# Jalankan kembali kontainer
+sudo docker run -d --restart=always -p 127.0.0.1:3001:3001 -v uptime-kuma:/app/data -v /var/run/docker.sock:/var/run/docker.sock --name uptime-kuma louislam/uptime-kuma:2
+```
 
-### 2. Dashboard Pemantauan Layanan Spasial (Detail Monitor)
-Panel ini menampilkan grafik latensi (*response time*) secara *real-time*, waktu aktif (*uptime percentage*), status sertifikat SSL, serta opsi untuk menjeda, mengubah, atau menghapus monitor.
+### 2. Backup & Restore Database SQLite
+ Seluruh data konfigurasi dan riwayat statistik tersimpan di file SQLite `/app/data/kuma.db`.
 
-* Contoh Pemantauan Layanan HTTP (`Github Service`):
-  ![Detail Monitor HTTP](./Dokumentasi/Screenshot%202026-10-19%20214032.png)
-
-* Contoh Pemantauan Ping Network (`Google DNS`):
-  ![Detail Monitor Ping](./Dokumentasi/Screenshot%202026-10-19%20214042.png)
-
-* Contoh Pemantauan Layanan Web Kampus (`Portal IPB University`):
-  ![Detail Monitor Web Kampus](./Dokumentasi/Screenshot%202026-10-19%20214052.png)
-
-### 3. Log Statistik & Riwayat Kejadian (Incident History)
-Halaman statistik merangkum total monitor yang Aktif, Tidak Aktif, maupun Pemeliharaan, beserta tabel log kejadian (*event log*) yang mencatat respon server (misal: `200 - OK` atau `ECONNREFUSED`).
-
-![Log Statistik Sistem](./Dokumentasi/Screenshot%202026-10-19%20214006.png)
-
-### 4. Menambahkan Pemantauan Baru (Add New Monitor)
-Formulir untuk mendaftarkan target pemantauan baru. Pengguna dapat memilih tipe monitor (HTTP/Ping/DNS/TCP), memasukkan URL/IP, serta menentukan interval pemeriksaan (*heartbeat interval*).
-
-![Tambah Monitor Baru](./Dokumentasi/Screenshot%202026-10-19%20213845.png)
-
-### 5. Manajemen & Tampilan Halaman Status Publik (Status Page)
-Uptime Kuma menyediakan fitur *Status Page* publik yang memungkinkan pengguna luar melihat kondisi kesehatan infrastruktur tanpa perlu login.
-
-* **Daftar Halaman Status**:
-  ![Daftar Status Page](./Dokumentasi/Screenshot%202026-10-19%20213756.png)
-
-* **Tampilan Status Page (`/status/compare`)**:
-  ![Tampilan Publik Status Page](./Dokumentasi/Screenshot%202026-10-19%20214128.png)
-
-* **Pengaturan & Edit Status Page**:
-  ![Edit Status Page](./Dokumentasi/Screenshot%202026-10-19%20214250.png)
-
-### 6. Panel Pengaturan Sistem (Settings)
-Menu konfigurasi umum untuk mengatur Zona Waktu (*Timezone*), Notifikasi, Proxy Terbalik, Keamanan (2FA), serta Kunci API Steam.
-
-![Pengaturan Sistem](./Dokumentasi/Screenshot%202026-10-19%20214354.png)
+* **Prosedur Backup**:
+  ```bash
+  sudo docker cp uptime-kuma:/app/data ./backup_kuma_$(date +%Y%m%d)
+  ```
+* **Prosedur Restore**:
+  ```bash
+  sudo docker cp ./backup_kuma_20261021/. uptime-kuma:/app/data
+  sudo docker restart uptime-kuma
+  ```
 
 ---
 
-# Pembahasan
+## 📊 Cara Pemakaian & Hasil Pengujian
 [`^ kembali ke atas ^`](#)
 
-### Kelebihan Uptime Kuma:
-1. **Ringan dan Sangat Cepat**: Dibangun menggunakan Node.js, Vue 3, dan Bootstrap 5 dengan komunikasi WebSocket (Socket.io), sehingga antarmuka sangat responsif tanpa perlu *refresh* halaman manual.
-2. **Gratis dan Tanpa Batasan (100% Open Source)**: Tidak ada batasan jumlah monitor atau frekuensi pemantauan (interval bisa diatur hingga 20 detik tanpa biaya).
-3. **Integrasi Notifikasi Sangat Luas**: Mendukung 90+ platform notifikasi populer secara *native*.
-4. **Desain UI/UX Modern**: Tampilan dashboard sangat bersih, intuitif, serta mendukung mode gelap (*Dark Mode*).
+Berikut adalah dokumentasi antarmuka dan hasil pengujian pengoperasian Uptime Kuma:
 
-### Kekurangan Uptime Kuma:
-1. **Penyimpanan Skala Kecil**: Secara *default* menggunakan SQLite. Sangat efisien untuk pemantauan ratusan target, namun kurang cocok untuk mengelola puluhan ribu monitor secara bersamaan pada infrastruktur enterprise raksasa.
-2. **Belum Mendukung Multi-Node Native**: Pemantauan dikirim dari satu lokasi server tempat Uptime Kuma di-deploy (tidak memiliki probe pemantauan terdistribusi dari berbagai benua secara bawaan seperti layanan berbayar).
+### 1. Halaman Login / Autentikasi Admin
+Pengamanan panel administrasi menggunakan autentikasi akun berbasis hash kredensial terenkripsi.
+
+<div align="center">
+    <img src="./Dokumentasi/01_login_admin.png" width="850" alt="Login Admin Uptime Kuma" />
+    <p><i>Gambar 1: Halaman Antarmuka Login Admin Uptime Kuma</i></p>
+</div>
+
+### 2. Dashboard Utama & Quick Stats
+Menampilkan statistik *real-time* ketersediaan monitor (*Up, Down, Maintenance*), log aktivitas kejadian (*event log*), serta grafik agregat latensi.
+
+<div align="center">
+    <img src="./Dokumentasi/02_dashboard_quickstats.png" width="850" alt="Dashboard Utama" />
+    <p><i>Gambar 2: Dashboard Utama, Ringkasan Quick Stats, dan Event Log History</i></p>
+</div>
+
+### 3. Formulir Penambahan Target Monitor
+Antarmuka pendaftaran target baru yang mendukung penyesuaian interval pengujian (*heartbeat*), retries, timeout, dan header HTTP kustom.
+
+<div align="center">
+    <img src="./Dokumentasi/03_form_add_monitor.png" width="850" alt="Add Monitor Form" />
+    <p><i>Gambar 3: Formulir Konfigurasi Penambahan Target Monitor Baru</i></p>
+</div>
+
+### 4. Detail Pemantauan Transport Layer (TCP Port 443)
+Pengujian keandalan port 443 pada IP Cloudflare `1.1.1.1` dengan rata-rata waktu respon 2.09 ms.
+
+<div align="center">
+    <img src="./Dokumentasi/04_monitor_tcp_cloudflare.png" width="850" alt="TCP Monitor" />
+    <p><i>Gambar 4: Detail Pemantauan Layer Transport TCP Port Cloudflare (1.1.1.1:443)</i></p>
+</div>
+
+### 5. Detail Pemantauan Application Layer (DNS Record)
+Pengujian resolusi nama domain `google.com` melalui DNS Resolver Cloudflare dengan pengambilan A-Record secara berkala.
+
+<div align="center">
+    <img src="./Dokumentasi/05_monitor_dns_cloudflare.png" width="850" alt="DNS Monitor" />
+    <p><i>Gambar 5: Detail Pemantauan Resolusi DNS Record google.com</i></p>
+</div>
+
+### 6. Detail Pemantauan Application Layer (HTTP GitHub)
+Pemantauan ketersediaan HTTPS GitHub beserta pelacakan otomatis masa berlaku Sertifikat SSL Let's Encrypt dan Domain Expiry.
+
+<div align="center">
+    <img src="./Dokumentasi/06_monitor_http_github.png" width="850" alt="HTTP GitHub Monitor" />
+    <p><i>Gambar 6: Detail Pemantauan Layanan HTTP & SSL Expiry GitHub</i></p>
+</div>
+
+### 7. Detail Pemantauan Network Layer (ICMP Ping)
+Pengujian latensi dasar jaringan (*Round Trip Time*) ke Google Primary DNS (`8.8.8.8`) dengan respons RTT stabil pada 14 ms.
+
+<div align="center">
+    <img src="./Dokumentasi/07_monitor_ping_google.png" width="850" alt="Ping Monitor" />
+    <p><i>Gambar 7: Detail Pemantauan ICMP Ping RTT Google DNS (8.8.8.8)</i></p>
+</div>
+
+### 8. Detail Pemantauan Web Kampus (Portal IPB University)
+Pemantauan ketersediaan layanan web utama IPB University (`https://ipb.ac.id/`) dengan status HTTP `200 - OK` dan pemantauan sertifikat TLS.
+
+<div align="center">
+    <img src="./Dokumentasi/08_monitor_http_ipb.png" width="850" alt="IPB Web Monitor" />
+    <p><i>Gambar 8: Pemantauan Layanan Web Portal IPB University</i></p>
+</div>
+
+### 9. Pemantauan Host-Level (Docker Socket Inspection)
+Pemantauan kesehatan kontainer lokal (`uptime-kuma`) secara *native* melalui komunikasi IPC Unix Domain Socket `/var/run/docker.sock`.
+
+<div align="center">
+    <img src="./Dokumentasi/09_monitor_docker_socket.png" width="850" alt="Docker Socket Monitor" />
+    <p><i>Gambar 9: Detail Pemantauan Health Check Docker Container via Socket</i></p>
+</div>
+
+### 10. Manajemen Status Page Publik
+Daftar pengelola halaman status yang dipublikasikan ke pengguna luar.
+
+<div align="center">
+    <img src="./Dokumentasi/10_status_pages_list.png" width="850" alt="Status Page List" />
+    <p><i>Gambar 10: Daftar Pengaturan Halaman Status Publik</i></p>
+</div>
+
+### 11. Editor Konfigurasi Status Page
+Panel penyuntingan antarmuka Public Status Page dengan slug `/status/public`.
+
+<div align="center">
+    <img src="./Dokumentasi/11_status_page_editor.png" width="850" alt="Status Page Editor" />
+    <p><i>Gambar 11: Editor Konfigurasi Tampilan Public Status Page (/status/public)</i></p>
+</div>
+
+### 12. Panel Pengaturan Sistem
+Pengaturan zona waktu (`UTC+07:00 Asia/Jakarta`), Entry Page, dan keamanan global aplikasi.
+
+<div align="center">
+    <img src="./Dokumentasi/12_system_settings.png" width="850" alt="System Settings" />
+    <p><i>Gambar 12: Panel Pengaturan Sistem dan Global Configurations</i></p>
+</div>
 
 ---
 
-### Perbandingan Aplikasi Sejenis: **Uptime Kuma vs UptimeRobot**
+## 📈 Pembahasan & Analisis Komdat
+[`^ kembali ke atas ^`](#)
 
-| Fitur / Parameter | Uptime Kuma (Self-Hosted) | UptimeRobot (SaaS/Komersial) |
+### 1. Analisis Multi-Layer Protocol Monitoring
+Berdasarkan hasil pengujian pada infrastruktur Kelompok 6, pemantauan tidak hanya terbatas pada Layer 7 (HTTP), melainkan mencakup observabilitas komprehensif:
+* **Layer 3 (Network - ICMP Ping)**: Berfungsi mendeteksi gangguan konektivitas fisik/routing jaringan mendasar. Latensi Google DNS stabil di angka **14.06 ms**.
+* **Layer 4 (Transport - TCP Port)**: Menguji apakah jabat tangan (*three-way handshake*) TCP pada port 443 terbuka tanpa perlu mengunduh konten HTTP. Hasilnya menunjukkan latensi sangat rendah (**2.09 ms**).
+* **Layer 7 (Application - HTTP/HTTPS & DNS)**: Menguji kesehatan aplikasi secara penuh. Mengukur waktu *response time* HTTP Portal IPB (**328.38 ms**) dan GitHub (**130.46 ms**), serta memastikan kepatuhan kode status `200 OK`.
+* **Host Level (Docker Socket)**: Memastikan proses internal kontainer berstatus `healthy` tanpa beban trafik jaringan eksternal.
+
+### 2. Kelebihan & Kekurangan Implementasi
+* **Kelebihan**:
+  1. **Zero Cost & High Performance**: Memanfaatkan kredit Azure Student dan perangkat lunak open-source sehingga sistem dapat berjalan tanpa biaya operasional tambahan.
+  2. **Automatic SSL/TLS Management**: Penggunaan Caddy menghilangkan risiko sertifikat SSL kadaluarsa pada domain monitoring.
+  3. **High Security**: Port internal 3001 diisolasi ke `127.0.0.1` dan seluruh trafik publik dienkripsi dengan HTTPS (TLS 1.3).
+  4. **Data Ownership**: Seluruh riwayat latensi dan log gangguan tersimpan aman di database SQLite mandiri.
+* **Kekurangan**:
+  1. **Single Point of Probing**: Karena di-deploy pada satu instance Azure VPS (Central Indonesia), hasil pengukuran latensi merefleksikan perspektif dari regional lokasi server tersebut.
+
+### 3. Tabel Matriks Perbandingan: Uptime Kuma vs UptimeRobot
+
+| Fitur / Parameter | Uptime Kuma (Deployment Kelompok 6) | UptimeRobot (Free Plan) |
 | :--- | :--- | :--- |
-| **Model Biaya** | Gratis sepenuhnya (*Open Source*) | Freemium (Berbayar untuk fitur lengkap) |
-| **Batas Jumlah Monitor** | **Tidak Terbatas** (Tergantung resource server) | Gratis maks. 50 monitor (Selebihnya berbayar) |
-| **Interval Pemantauan Min.**| **Hingga 20 Detik** (Gratis) | 5 Menit (Gratis) / 1 Menit (Berbayar) |
-| **Privasi Data** | Data tersimpan mandiri di server sendiri | Data disimpan di server pihak ketiga |
-| **Lokasi Pemantauan** | Single-location (Lokasi server tempat deploy) | Multi-location (Probe dari berbagai negara) |
-| **Saluran Notifikasi** | 90+ Integrasi gratis (Telegram, Discord, dll) | Terbatas di versi gratis (SMS/Call berbayar) |
-| **Kemudahan Setup** | Perlu instalasi Docker/Server sederhana | Langsung pakai (Daftar akun di web) |
+| **Biaya Software** | 100% Gratis & Open Source | Freemium |
+| **Batas Jumlah Monitor** | **Tanpa Batas** (Sesuai resource VPS) | Maksimal 50 Monitor |
+| **Interval Minimal** | **20 Detik** (Gratis) | 5 Menit (Gratis) / 1 Menit (Berbayar) |
+| **Dukungan Docker Socket** | **Ya** (Native via Socket Mount) | Tidak Ada |
+| **Integrasi Notifikasi** | 90+ Platform Gratis (Telegram, Discord, dll) | Terbatas (SMS & Call Berbayar) |
+| **Custom Domain & SSL** | Gratis via Caddy & Azure DNS Label | Membutuhkan Paket Pro Berbayar |
+| **Privasi Data** | Terkontrol Sepenuhnya di VPS Sendiri | Tersimpan di Server Pihak Ketiga |
 
 ---
 
-# Referensi
+## 📌 Kesimpulan
 [`^ kembali ke atas ^`](#)
 
-1. **GitHub Repository Official**: [Louislam / Uptime Kuma](https://github.com/louislam/uptime-kuma)
-2. **Dokumentasi Resmi & Wiki**: [Uptime Kuma Wiki](https://github.com/louislam/uptime-kuma/wiki)
-3. **Docker Hub**: [Official Image Uptime Kuma](https://hub.docker.com/r/louislam/uptime-kuma)
-4. **Dokumentasi Kurikulum KDKJ IPB**: [Projek Akhir Komdat-Lab](https://github.com/auriza/komdat-lab/blob/master/projek.md)
+1. Proyek akhir pembuatan sistem pemantauan server dan jaringan menggunakan **Uptime Kuma** pada **Azure Cloud VPS** telah berhasil diimplementasikan 100% sesuai dengan standar industri.
+2. Penggunaan **Docker Engine** terbukti mempermudah proses kuarantin (*isolation*) aplikasi, pembaruan versi, serta manajemen ketergantungan sistem.
+3. Penggunaan **Caddy Web Server** secara efektif menyelesaikan tantangan enkripsi HTTPS/SSL otomatis dan pengalihan trafik dari port standar 80/443 ke aplikasi Uptime Kuma.
+4. Sistem mampu melakukan pemantauan jaringan secara *multi-layer* (ICMP, TCP, HTTP, DNS, dan Docker Socket) secara responsif dengan interval hingga 20 detik.
+5. **Status Page Publik** yang dikonfigurasi pada URL `https://kuma-kelompok6.indonesiacentral.cloudapp.azure.com/status/public` dapat diakses dengan lancar tanpa autentikasi oleh pengguna luar untuk mentransparansikan kondisi ketersediaan layanan.
+
+---
+
+## 📚 Referensi
+[`^ kembali ke atas ^`](#)
+
+1. **Official Uptime Kuma Repository**: [https://github.com/louislam/uptime-kuma](https://github.com/louislam/uptime-kuma)
+2. **Uptime Kuma Official Documentation & Wiki**: [https://github.com/louislam/uptime-kuma/wiki](https://github.com/louislam/uptime-kuma/wiki)
+3. **Caddy Web Server Documentation**: [https://caddyserver.com/docs/](https://caddyserver.com/docs/)
+4. **Docker Engine Reference Manual**: [https://docs.docker.com/engine/](https://docs.docker.com/engine/)
+5. **Microsoft Azure Virtual Machine Documentation**: [https://learn.microsoft.com/en-us/azure/virtual-machines/](https://learn.microsoft.com/en-us/azure/virtual-machines/)
+6. **Modul Praktikum Komunikasi Data dan Jaringan Komputer (KDKJ) IPB**: [https://github.com/auriza/komdat-lab](https://github.com/auriza/komdat-lab)

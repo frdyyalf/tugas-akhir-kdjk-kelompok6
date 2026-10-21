@@ -19,9 +19,11 @@ Proyek ini disusun untuk memenuhi tugas akhir mata kuliah **Komunikasi Data dan 
 
 | NIM | Nama Mahasiswa |
 | :--- | :--- |
+| `M0403241005` | **Lazarus Prima** |
+| `M0403241011` | **Aaliyah Nofarizki** |
+| `M0403241058` | **Syazana Aqila** |
+| `M0403241065` | **Jeslyn Angelica** |
 | `M0403241097` | **Ferdy Alfalah** |
-| `M040324xxxx` | **Anggota Kelompok 2** |
-| `M040324xxxx` | **Anggota Kelompok 3** |
 
 ---
 

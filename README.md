@@ -213,7 +213,7 @@ pm2 save && pm2 startup
 
 - **Reverse Proxy & Domain**: Caddy Web Server mengarahkan domain `kuma-kelompok6.indonesiacentral.cloudapp.azure.com` ke port lokal `127.0.0.1:3001` sekaligus mengaktifkan SSL/HTTPS otomatis.
 - **Zona Waktu**: Mengatur zona waktu display ke `UTC+07:00 (Asia/Jakarta)` di menu **Settings > General** agar log kejadian dan grafik waktu sesuai dengan WIB.
-- **Entry Page**: Diatur dari `Dashboard` menjadi **`Status Page`** agar pengunjung umum yang membuka URL utama langsung diarahkan ke halaman status tanpa prompt login.
+- **Entry Page**: Diatur dari `Dashboard` menjadi **`Status Page`** agar pengunjung umum yang membuka URL utama langsung diarahkan ke halaman status tanpa login.
 - **Penyimpanan Data**: Menggunakan volume persisten Docker `uptime-kuma` yang menyimpan file database SQLite `kuma.db` di `/app/data`.
 - **Akses Docker Host**: Mendaftarkan Docker Daemon Socket (`/var/run/docker.sock`) pada menu **Settings > Docker Hosts** untuk pemantauan *container healthcheck*.
 - **Public Status Page**: Mengonfigurasi Status Page dengan slug `/status/public` dan menonaktifkan proteksi kata sandi.

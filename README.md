@@ -201,7 +201,7 @@ pm2 save && pm2 startup
 | No | Gejala / Masalah | Lokasi | Penyebab | Solusi |
 | :--- | :--- | :--- | :--- | :--- |
 | 1 | Port `3001` harus diketik pada URL browser | VPS Azure | Aplikasi berjalan pada port non-standar `3001` | Pasang Reverse Proxy Caddy untuk meneruskan trafik port `80/443` ke `127.0.0.1:3001`. |
-| 2 | Status Monitor Game Server bertanda merah (`[DOWN] Steam API Key not found`) | VPS Azure | Tipe monitor *Steam Game Server* membutuhkan API Key resmi dari Valve | Ubah tipe monitor menjadi **TCP Port** (`27015`) atau masukkan Steam API Key dari `steamcommunity.com/dev/apikey`. |
+| 2 | Status Monitor Game Server bertanda merah (`[DOWN] Steam API Key not found`) | VPS Azure | Tipe monitor *Steam Game Server* membutuhkan API Key resmi | Ubah tipe monitor menjadi **TCP Port** (`27015`) atau masukkan Steam API Key dari `steamcommunity.com/dev/apikey`. |
 | 3 | Tipe monitor *Docker Container* tidak merespon | VPS Azure | Container Uptime Kuma tidak memiliki akses ke socket Docker host | Jalankan ulang container dengan menambahkan parameter `-v /var/run/docker.sock:/var/run/docker.sock`. |
 | 4 | Halaman publik meminta login saat diakses pengunjung luar | VPS Azure | Pengunjung mengakses URL `/dashboard` atau Entry Page belum diset ke Status Page | Ubah **Settings > General > Entry Page** menjadi **Status Page** dan bagikan link spesifik `/status/public`. |
 | 5 | Peringatan *Connection Refused* saat SSH port `2222` | VM Lokal | Perintah SSH diketik di dalam terminal VM lokal | Jalankan perintah SSH dari PowerShell / Command Prompt laptop Host. |

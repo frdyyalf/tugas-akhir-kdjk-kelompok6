@@ -2,7 +2,7 @@
 <div align="center">
     <img src="https://raw.githubusercontent.com/louislam/uptime-kuma/master/public/icon.svg" width="120" alt="Uptime Kuma Logo" />
     <h1>Aplikasi Web Uptime Kuma</h1>
-    <p><b>Tugas Proyek Akhir Mata Kurikulum Komunikasi Data dan Jaringan Komputer (KDKJ)</b></p>
+    <p><b>Tugas Proyek Akhir Mata Kuliah Komunikasi Data dan Jaringan Komputer (KDJK)</b></p>
 
 [![Azure VPS](https://img.shields.io/badge/Deployment-Azure%20VM-0089D6?style=for-the-badge&logo=microsoftazure&logoColor=white)](https://azure.microsoft.com/)
 [![Docker](https://img.shields.io/badge/Docker-Engine-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
@@ -17,7 +17,7 @@
 ## Anggota Kelompok
 [`^ kembali ke atas ^`](#top)
 
-Proyek ini disusun untuk memenuhi tugas akhir mata kuliah **Komunikasi Data dan Jaringan Komputer (KDKJ)**:
+Proyek ini disusun untuk memenuhi tugas akhir mata kuliah **Komunikasi Data dan Jaringan Komputer (KDJK)**:
 
 | NIM | Nama Mahasiswa |
 | :--- | :--- |

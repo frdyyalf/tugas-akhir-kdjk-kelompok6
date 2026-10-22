@@ -288,7 +288,6 @@ Untuk mempermudah deployment penuh di lingkungan server baru, disediakan skrip b
 #!/bin/bash
 # ====================================================================
 # Skrip Otomatisasi Deployment Uptime Kuma & Caddy SSL
-# Kelompok 6 - KDKJ IPB University
 # ====================================================================
 
 set -e
